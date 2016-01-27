@@ -1,0 +1,26 @@
+extends layout
+
+block content
+	div.container
+		div.text-center
+			h1 Plans tonight? <br/><i class='fa fa-map-marker'></i><i class='fa fa-taxi'></i><i class='fa fa-glass'></i>
+			div
+			p.lead See which bars are hoppin' tonight and RSVP ahead of time!
+			p.lead Remember: take a cab and drink responsibly.
+		form(action='/', method='post')
+			div.row
+				div.col-md-10
+					input.form-control(type='text', name='location', id='location', placeholder='WHERE YOU AT?')
+				button.btn.btn-default.col-md-2(type='submit').go GO
+		div.loading
+			i.fa.fa-cog
+		if data
+			each val, index in data
+				div.row.bar
+					div.col-md-1
+						img(src='#{val.image_url}')
+					div.col-md-11.text
+						a(href='#{val.url}') #{val.name}
+						a.btn.btn-default.going(href='/going/#{val.id}') #{going[index]}  GOING
+						p <i>"#{val.snippet_text}"</i>
+
